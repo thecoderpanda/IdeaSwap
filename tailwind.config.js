@@ -9,6 +9,9 @@ module.exports = {
         primary: ["Syne", "sans-serif"],
         secondary: ["Inter", "sans-serif"],
       },
+      backgroundImage: {
+        'HeroBG': 'url("images/HeroHomeBG.svg")',
+      },
     },
   },
   plugins: [require("daisyui")],
