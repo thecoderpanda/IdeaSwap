@@ -40,6 +40,11 @@ const userSchema = mongoose.Schema(
       enum: roles,
       default: 'user',
     },
+    walletaddress: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     isEmailVerified: {
       type: Boolean,
       default: false,
