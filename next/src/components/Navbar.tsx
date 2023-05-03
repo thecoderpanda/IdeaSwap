@@ -1,5 +1,5 @@
 // import React from "react";
-// import ConnectWallet from "./ConnectWallet";
+import ConnectWallet from "./ConnectWallet";
 
 // type Props = {};
 
@@ -36,6 +36,7 @@ export default function Navbar() {
         <div className='flex text-white  justify-center items-center gap-12'>
             <BsGithub fontSize={40} className='hover:text-sky-500' />
             <BsTwitter fontSize={40} className='hover:text-sky-500' />
+            <ConnectWallet />
         </div>
     </div>
   )

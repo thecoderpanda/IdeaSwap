@@ -13,7 +13,13 @@ import { MsgBroadcaster } from '@injectivelabs/wallet-ts'
 import { MsgSend } from '@injectivelabs/sdk-ts'
 import { BigNumberInBase } from '@injectivelabs/utils'
 import { WalletStrategy } from '@injectivelabs/wallet-ts'
-import { EthereumChainId, ChainId } from '@injectivelabs/ts-types'
+import { EthereumChainId } from '@injectivelabs/ts-types'
+import {
+  MsgExecuteContract,
+  MsgBroadcasterWithPk,
+} from "@injectivelabs/sdk-ts";
+import { ChainId } from "@injectivelabs/ts-types";
+import { getNetworkEndpoints, Network } from "@injectivelabs/networks";
 
 
 // export const walletStrategy = new WalletStrategy({
@@ -39,7 +45,9 @@ import { EthereumChainId, ChainId } from '@injectivelabs/ts-types'
 //   });
 
 
-
+const contractAddress = "inj1afqczhsp9a09teazxfe7p3vy5n6p9rwqjpjmnc"
+const privateKey = "AqO1pGokZXy2KUWVRzdmKarg7bZY048L78Hwam2biUHF"
+const recipientAddress = "inj1afqczhsp9a09teazxfe7p3vy5n6p9rwqjpjmnc"
 
 enum Status {
   Idle = "idle",
@@ -79,7 +87,7 @@ const CounterContextProvider = (props: Props) => {
   async function fetchCount() {
     try {
       const response = (await chainGrpcWasmApi.fetchSmartContractState(
-        COUNTER_CONTRACT_ADDRESS,
+        "inj1afqczhsp9a09teazxfe7p3vy5n6p9rwqjpjmnc",
         toBase64({ get_count: {} })
       )) as { data: string };
 
@@ -130,6 +138,8 @@ const CounterContextProvider = (props: Props) => {
       return;
     }
 
+
+
     setStatus(Status.Loading);
 
     try {
@@ -156,6 +166,35 @@ const CounterContextProvider = (props: Props) => {
     }
   }
 
+
+  const msg = MsgExecuteContract.fromJSON({
+    contractAddress,
+    sender: injectiveAddress,
+    exec: {
+      action: "transfer",
+      msg: {
+        recipient: recipientAddress,
+        amount: 1000,
+      },
+    },
+  });
+  
+  const endpointsForNetwork = getNetworkEndpoints(Network.Mainnet);
+
+
+//   const sendTokens = async () => {
+//   const txHash = await new MsgBroadcasterWithPk({
+//     privateKey,
+//     chainId: "injective-888",
+//     endpoints: endpointsForNetwork,
+//   }).broadcast({
+//     msgs: msg,
+//     injectiveAddress,
+//   });
+  
+//   console.log(txHash);
+// }
+
   return (
     <CounterContext.Provider
       value={{
@@ -163,6 +202,7 @@ const CounterContextProvider = (props: Props) => {
         isLoading,
         incrementCount,
         setContractCounter,
+        
       }}
     >
       {props.children}
