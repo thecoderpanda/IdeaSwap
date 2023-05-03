@@ -1,3 +1,6 @@
+import HeroHome from "@/components/HeroHome";
+import Navbar from "@/components/Navbar";
+import TrendingHome from "@/components/TrendingHome";
 import { useCounterStore } from "@/context/CounterContextProvider";
 import React, { useEffect, useState } from "react";
 
@@ -15,8 +18,8 @@ function Home({}: Props) {
     setContractCounter(inputCount);
   }
   return (
-    <div className='flex justify-center pt-20'>
-      <div className='bg-white rounded-lg p-5 text-center'>
+    <div className='bg-[#151515]'>
+      {/* <div className='bg-white rounded-lg p-5 text-center'>
         <div>
           <h1>The Count is</h1>
           <p>{isLoading ? "loading..." : count}</p>
@@ -46,7 +49,10 @@ function Home({}: Props) {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
+      
+      <HeroHome />
+      <TrendingHome />
     </div>
   );
 }

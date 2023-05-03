@@ -9,6 +9,37 @@ import {
 } from "@injectivelabs/sdk-ts";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useWalletStore } from "./WalletContextProvider";
+import { MsgBroadcaster } from '@injectivelabs/wallet-ts'
+import { MsgSend } from '@injectivelabs/sdk-ts'
+import { BigNumberInBase } from '@injectivelabs/utils'
+import { WalletStrategy } from '@injectivelabs/wallet-ts'
+import { EthereumChainId, ChainId } from '@injectivelabs/ts-types'
+
+
+// export const walletStrategy = new WalletStrategy({
+  // chainId: ChainId.Testnet,
+  // ethereumOptions: {
+  //   ethereumChainId: EthereumChainId.Mainnet,
+  //   rpcUrl: alchemyRpcEndpoint
+  // }
+// })
+
+
+// Usage Example
+// (async () => {
+//   const signer = 'inj1...'
+  
+//   const msg = MsgSend.fromJSON({
+//     amount: {
+//         denom: 'inj',
+//         amount: new BigNumberInBase(0.01).toWei().toFixed()
+//     },
+//     srcInjectiveAddress: signer,
+//     dstInjectiveAddress: 'inj1...',
+//   });
+
+
+
 
 enum Status {
   Idle = "idle",
